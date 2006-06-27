@@ -1,0 +1,5 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=1587
+
+This is a syntax script for Myghty (Python embedded in HTML). It was created from mason.vim just by replacing all "perl" occurences by "python".
+Then slight modifications in regular expressions were introduced to match differences between Mason and Myghty syntax.
+Seems to work well.
