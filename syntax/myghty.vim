@@ -6,6 +6,8 @@
 " This script is based on mason.vim by Andrew Smith.
 "
 " It was created simply by replacing all [Pp]erl occurences by [Pp]ython :)
+" Then I just modified some of the regular expressions to match differences
+" between Mason and Myghty syntax.
 " Seems to work fine for me.
 "
 
@@ -49,15 +51,18 @@ endif
 "
 syn region myghtyLine matchgroup=Delimiter start="^%" end="$" contains=@pythonTop
 syn region myghtyExpr matchgroup=Delimiter start="<%" end="%>" contains=@pythonTop
-syn region myghtypython matchgroup=Delimiter start="<%python>" end="</%python>" contains=@pythonTop
+syn region myghtypython matchgroup=Delimiter start="<%python[^>]*>" end="</%python>" contains=@pythonTop
 syn region myghtyComp keepend matchgroup=Delimiter start="<&" end="&>" contains=@pythonTop
 
-syn region myghtyArgs matchgroup=Delimiter start="<%args>" end="</%args>" contains=@pythonTop
+syn region myghtyArgs matchgroup=Delimiter start="<%args[^>]*>" end="</%args>" contains=@pythonTop
 
 syn region myghtyInit matchgroup=Delimiter start="<%init>" end="</%init>" contains=@pythonTop
 syn region myghtyCleanup matchgroup=Delimiter start="<%cleanup>" end="</%cleanup>" contains=@pythonTop
 syn region myghtyOnce matchgroup=Delimiter start="<%once>" end="</%once>" contains=@pythonTop
+syn region myghtyGlobal matchgroup=Delimiter start="<%global>" end="</%global>" contains=@pythonTop
 syn region myghtyShared matchgroup=Delimiter start="<%shared>" end="</%shared>" contains=@pythonTop
+syn region myghtyReqLocal matchgroup=Delimiter start="<%requestlocal>" end="</%requestlocal>" contains=@pythonTop
+syn region myghtyReqOnce matchgroup=Delimiter start="<%requestonce>" end="</%requestonce>" contains=@pythonTop
 
 syn region myghtyDef matchgroup=Delimiter start="<%def[^>]*>" end="</%def>" contains=@htmlTop
 syn region myghtyMethod matchgroup=Delimiter start="<%method[^>]*>" end="</%method>" contains=@htmlTop
@@ -70,7 +75,7 @@ syn region myghtyFilter matchgroup=Delimiter start="<%filter>" end="</%filter>" 
 syn region myghtyDoc matchgroup=Delimiter start="<%doc>" end="</%doc>"
 syn region myghtyText matchgroup=Delimiter start="<%text>" end="</%text>"
 
-syn cluster myghtyTop contains=myghtyLine,myghtyExpr,myghtypython,myghtyComp,myghtyArgs,myghtyInit,myghtyCleanup,myghtyOnce,myghtyShared,myghtyDef,myghtyMethod,myghtyFlags,myghtyAttr,myghtyFilter,myghtyDoc,myghtyText
+syn cluster myghtyTop contains=myghtyLine,myghtyExpr,myghtypython,myghtyComp,myghtyArgs,myghtyInit,myghtyCleanup,myghtyOnce,myghtyGlobal,myghtyShared,myghtyReqLocal,myghtyReqOnce,myghtyDef,myghtyMethod,myghtyFlags,myghtyAttr,myghtyFilter,myghtyDoc,myghtyText
 
 " Set up default highlighting. Almost all of this is done in the included
 " syntax files.
